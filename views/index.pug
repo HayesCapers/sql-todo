@@ -1,5 +1,46 @@
 extends layout
 
+block links
+	link(rel='stylesheet', href='/stylesheets/style.css')
+
 block content
-  h1 sanity check
-  p Welcome to #{title}
+
+	.container
+		.row
+			.col-sm-12.text-center
+				h3 #{message}
+				h1 Your ToDo List!
+				form(class='form-inline' action='/addItem' method='post')
+					.form-group
+						.input-group
+							input.form-control(type='text' placeholder='New Task' name='newTask')
+						.input-group
+							input.form-control(type='date' name='newTaskDate')
+						button.btn.btn-primary(type='submit') ADD TASK
+
+		.row
+			.col-sm-12
+				table.table
+					tr
+						th Task Name
+						th Task Due Date
+						th Edit
+						th Delete
+					- for (let i = 0; i < taskArray.length; i++)
+						tr
+							td #{taskArray[i].taskName}
+							td #{taskArray[i].taskDate}
+							td
+								button(class='btn btn-warning') Edit
+							td
+								a(href="/delete/" + taskArray[i].id)
+									button(class='btn btn-danger') DELETE
+
+
+						
+								
+	
+
+
+
+
